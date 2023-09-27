@@ -1,0 +1,88 @@
+body{
+    background-color: #f8f9fa;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    background-color: #d9d9d9;
+}
+
+h3{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.post-box{
+    background-color: #fff;
+    padding: 56px;
+    border: 1px solid #dedede;
+    margin: 48px 0 0 0 ;
+
+}
+
+.post-box img{
+    width: 100%;
+    height: 380px;
+    object-fit: contain;
+    background-color: #dedede;
+    border-radius: 12px;
+}
+
+.info-button-box{
+    margin: 28px 0;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.user-info p{
+    opacity: 0.5;
+}
+
+.button-box{
+    gap: 8px;
+}
+
+.button-box .grey  {
+    background-color: #dedede;
+    color: #000;
+    font-weight: 700;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+}
+
+.button-box .orange {
+    background-color: #fa6616;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+hr{
+    opacity: 0.5;
+}
+
+
+.post-info-box{
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0 0 0;
+    gap: 16px;
+}
+
+.location-views-box{
+    opacity: 0.5;
+    margin-top: 40px;
+}

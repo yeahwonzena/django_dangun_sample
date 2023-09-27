@@ -1,0 +1,272 @@
+body{
+    background-color: #f8f9fa;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    background-color: #d9d9d9;
+}
+
+h3{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.post-box{
+    background-color: #fff;
+    border: 1px solid #dedede;
+    margin: 48px 0 0 0 ;
+    align-items: stretch;
+    height: 580px;
+}
+
+.post-box img{
+    width: 100%;
+    height: 380px;
+    object-fit: contain;
+    background-color: #dedede;
+    border-radius: 12px;
+}
+
+.info-button-box{
+    margin: 28px 0;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.user-info p{
+    opacity: 0.5;
+}
+
+.button-box{
+    gap: 8px;
+}
+
+.button-box .grey  {
+    background-color: #dedede;
+    color: #000;
+    font-weight: 700;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+}
+
+.button-box .orange {
+    background-color: #fa6616;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+hr{
+    opacity: 0.5;
+}
+
+
+.post-info-box{
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0 0 0;
+    gap: 16px;
+}
+
+.location-views-box{
+    opacity: 0.5;
+    margin-top: 40px;
+}
+
+/* 채팅선택창 */
+.chatroom-link{
+    width: -webkit-fill-available;
+    text-decoration: none;
+    color: #000;
+}
+
+.chat-select-container{
+    width: 30%;
+    background-color: #fff;
+    border-right: 1px solid #e2e2e2;
+}
+
+.temp{
+    border: 1px solid #fa6616;
+    font-size: 12px;
+    border-radius: 48px;
+    padding: 2px 6px;
+    margin-left: 4px;
+}
+
+.id-box{
+    width: 100%;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 13px 20px;
+}
+
+.chat-list-box{
+    width: 100%;    
+}
+
+.chat-box{
+    width: -webkit-fill-available;
+    padding: 13px 20px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.ai-profile{
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+}
+
+.ai-profile img{
+    height: auto;
+    background-color: transparent;
+}
+
+.chat-thumb-text{
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+.s-text{
+    margin-left: 4px;
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+.chat-box img{
+    height: auto;
+}
+
+.thumbnail-box{
+    width: 48px;
+    height: 48px;
+    background-color:#818181;
+    border-radius: 8px;
+}
+
+/* 채팅창 */
+.chat-main-container{
+    width: 70%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-info{
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.goods-box{
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e2e2;;
+}
+
+.goods-info-box{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.selected-thumbnail-box{
+    width: 48px;
+    height: 48px;
+}
+
+.selected-thumbnail-box img{
+    height: 100%;
+}
+
+.goods-box button{
+    padding: 6px 12px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #818181;
+}
+
+/* 채팅창 메인 */
+.chat-container{
+    padding: 14px 20px;
+    max-height: 264px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.message-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.message-text{
+    padding: 14px 20px;
+    background-color: #eaeaea;
+    width: fit-content;
+    border-radius: 20px;
+}
+
+.from-me{
+    justify-content: flex-end;
+}
+
+.from-me div{
+    background-color: #fa6616;
+    color: #fff;
+}
+
+/* 작성창 */
+.chat-input{
+    background-color: #fff;
+    margin: 20px;
+    border:1px solid #818181;
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
+.chat-input textarea{
+    width: -webkit-fill-available;
+    display: block;
+    border: none;
+    resize: none;
+    border-radius: 8px;
+    height: 40px;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.chat-input textarea:focus{
+    outline: none;
+    resize: none;
+}
+
+.chat-input div{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chat-input button{
+    background-color: #E1E1E1;
+    border:none;
+    padding: 6px 20px;
+    border-radius: 4px;
+    margin: 16px;
+}

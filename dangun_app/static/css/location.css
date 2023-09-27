@@ -1,0 +1,37 @@
+.primary-button{
+    padding: 16px;
+    background-color: #fa6616;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+}
+
+.primary-button:hover{
+    background-color: #ff823f;
+}
+
+.region-setting-box{
+    margin-top: 64px;
+}
+
+.region-setting-box label{
+    margin-bottom: 2px;
+}
+
+.region-setting{
+    background-color: #fff;
+}
+
+.region-input input{
+    width:80%;
+    padding:14px;
+    border-radius: 2px;
+}
+
+.region-input button{
+    padding:14px;
+}

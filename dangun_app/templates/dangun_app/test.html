@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+    <style>
+      body {
+        font-family: 'Arial, sans-serif';
+      }
+
+      .chat-container {
+        width: 300px;
+        height: 500px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow-y: scroll;
+        margin: 50px auto 0;
+      }
+
+      .chat-input {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      .chat-input-container {
+        position: fixed;
+        bottom: 0;
+        width: 300px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="chat-container" id="chatContainer">
+      <!-- Chat messages will appear here -->
+    </div>
+
+    <div class="chat-input-container">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+    </div>
+
+    <script>
+      const chatContainer = document.getElementById('chatContainer');
+      const chatInput = document.getElementById('chatInput');
+
+      const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat/');
+
+      ws.onopen = () => {
+        console.log('Connected to the chat server.');
+      };
+
+      ws.onmessage = (event) => {
+        const messageData = JSON.parse(event.data);
+        chatContainer.innerHTML += `<div>${messageData.message}</div>`;
+      };
+
+      ws.onclose = () => {
+        console.log('Disconnected from the chat server.');
+      };
+
+      chatInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter' && chatInput.value) {
+          ws.send(JSON.stringify({'message': chatInput.value}));
+          chatInput.value = '';
+        }
+      });
+    </script>
+
+  </body>
+
+</html>

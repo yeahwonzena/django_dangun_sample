@@ -1,0 +1,55 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    width: 100%;
+    z-index: 999;
+    color: #f9f8f4;
+    text-decoration: none;
+    font-family: 'Pretendard', sans-serif;
+    padding: 14px 0;
+}
+
+.logo{
+    margin-right: 68px;
+}
+
+.nav-buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.nav-buttons a button{
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    font-weight: 700;
+
+}
+
+.ghost-button{
+    font-size: 16px;
+    padding: 6px 16px;
+    text-decoration: none;
+    border: 1px solid #d7d7d7;
+}
+
+.orange{
+    color: #fa6616;
+    border: 1px solid #fa6616;
+}
+
+input{
+    background-color: #f3f3f3;
+    padding:6px 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.orange-text{
+    color: #fa6616;
+    
+}

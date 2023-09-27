@@ -1,0 +1,160 @@
+<!-- chat/templates/chat_room.html -->
+{% load static%}{% load humanize %}
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    <title>채팅하기</title>
+  </head>
+
+  <body class="back-ye">
+    {% include 'dangun_app/nav.html' %}
+
+    <div class="content-box">
+      <div class="container column">
+        <div class="post-box flex-box">
+
+          <!-- 채팅선택창 -->
+          <div class="chat-select-container">
+            <div class="flex-box">
+
+              <!-- 아이디및 체크박스 -->
+              <div class="id-box flex-box between">
+                <span id="user-name">{{ user.username }}</span><br>
+
+                <div>
+                  {% comment %} <label>
+                    안읽은 메세지만 보기
+                    <input type="checkbox" name="" id="">
+                  </label> {% endcomment %}
+                </div>
+              </div>
+            </div>
+
+            <!-- 채팅 리스트 -->
+            <div class="chat-list-box flex-box column">
+              <!-- 봇 -->
+              <div class="chat-box flex-box">
+                <div class="ai-profile">
+                  <img src="{% static 'img/icon_aibot.png'%}" alt="">
+                </div>
+                <div>
+                  <p class="bold">AI 챗봇</p>
+                  <p class="chat-thumb-text">궁금한 내용을 물어보세요!</p>
+                </div>
+              </div>
+              <!-- 채팅방리스트 -->
+              {% include 'dangun_app/chat_room_list.html' %}
+
+            </div>
+          </div>
+
+          <!-- 채팅창-->
+          <div class="chat-main-container">
+            <div>
+              <div class="contact-info flex-box">
+                {{ seller.username }}
+
+                <span id="room-name" style="display:none">{{ chat_room.pk }}</span>
+              </div>
+
+              <!--물품정보-->
+              <div class="goods-box flex-box between">
+                <div class="flex-box">
+                  <div class="selected-thumbnail-box">
+                    <img src="{{ post.images.url }}" alt="">
+                  </div>
+                  <div class="goods-info-box">
+                    <p>{{ post.title }}</p>
+                    <p class="bold">{{ post.price }}원</p>
+                  </div>
+                </div>
+                <button>거래확정하기</button>
+              </div>
+
+              <!--채팅창 메인-->
+
+              <div id="chat-log" class="chat-container"></div>
+
+              <form class="chat-input" action="">
+                <textarea name="" id="chat-message-input" cols="30" rows="10" placeholder="메세지를 입력해주세요"></textarea>
+                <div>
+                  <button id="chat-message-submit">전송</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'dangun_app/footer.html' %}
+
+    </body>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        // 주소에서 룸번호 찾기
+        const roomName = document
+          .getElementById('room-name')
+          .textContent
+          .trim();
+
+        // 유저 id 찾기
+        const userName = document
+          .getElementById('user-name')
+          .textContent
+          .trim();
+
+        // 웹소켓설정
+        const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat_index/' + roomName + '/');
+
+        //메세지 실시간으로 채팅창에 넣음
+        chatSocket.onmessage = function (e) {
+          const data = JSON.parse(e.data);
+
+          let chatLogTest = document.getElementById("chat-log");
+          chatLogTest.innerHTML += `<div class="message-box from-me">
+              <div class="message-text">${data.message}</div>
+            </div>`;
+        };
+        chatSocket.onclose = function (e) {
+          console.error('Chat socket closed unexpectedly');
+        };
+
+        // 채팅창에 키 들어가있도록 함
+        document
+          .querySelector('#chat-message-input')
+          .focus();
+
+        // 채팅 전송
+        document
+          .querySelector('#chat-message-input')
+          .onkeyup = function (e) {
+            if (e.keyCode === 13) { // enter, return
+              document
+                .querySelector('#chat-message-submit')
+                .click();
+            }
+          };
+
+        document
+          .querySelector('#chat-message-submit')
+          .onclick = function (e) {
+            e.preventDefault();
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({'username': userName, 'message': message}));
+            messageInputDom.value = '';
+          };
+      });
+    </script>
+
+  </html>

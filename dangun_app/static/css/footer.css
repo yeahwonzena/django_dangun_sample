@@ -1,0 +1,25 @@
+.footer{
+    width: 100%;
+    background-color: #fff;
+    height: 200px;
+    display: flex;
+    font-family: 'Pretendard', sans-serif;
+    margin-top: 112px;
+}
+
+.buttons{
+    gap: 20px;
+}
+
+.buttons a{
+    color: #000;
+    text-decoration: none;
+}
+
+.download-center button{
+    padding: 12px 26px;
+    background-color: #f2f3f6;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+}

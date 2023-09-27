@@ -1,0 +1,39 @@
+{% load static %}
+
+<nav>
+  <div class="container">
+    <div class="full-box flex-box between">
+      <div class="flex-box">
+        <div class="logo">
+          <a href="{% url 'dangun_app:main' %}">
+            <img src="{% static 'img/logo.png' %}" alt=""/>
+          </a>
+        </div>
+        <div class="nav-buttons">
+          <a href="/trade">
+            <button id="trade-button">중고거래</button>
+          </a>
+          {% if user.is_authenticated %}
+            <a href="/location">
+              <button id="location-button">동네인증</button>
+            </a>
+          {% endif %}
+
+        </div>
+      </div>
+      <div class="flex-box gap8">
+        <form method="GET" action="{% url 'dangun_app:search' %}">
+          <input type="text" id="search" name="search" class="search" placeholder="물품이나 동네를 검색해보세요"/>
+        </form>
+        {% if user.is_authenticated %}
+          <a href="{% url 'dangun_app:chat' %}" class="ghost-button orange">채팅하기</a>
+          <a href="{% url 'dangun_app:logout' %}" class="ghost-button">로그아웃</a>
+
+        {% else %}
+          <a href="{% url 'dangun_app:login' %}" class="ghost-button" style="color: #1e1e1e">로그인</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/nav.js' %}"></script>
+</nav>

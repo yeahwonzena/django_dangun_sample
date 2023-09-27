@@ -1,0 +1,67 @@
+{% load custom_filter%}
+{% load static%}{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>거래 글쓰기</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/write.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+  </head>
+
+  <body>
+    {% include 'dangun_app/nav.html' %}
+    <div class="content-box">
+      <div class="container">
+
+        {% block content %}
+          <div class="about-trade">
+            <div class="container">
+              <form class="write-box" method="POST" action="{% if post %}{% url 'dangun_app:edit' post.id %}{% else %}{% url 'dangun_app:create_form' %}{% endif %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="flex-box">
+                  <label class="img-upload">
+                    <img src="{% if post %}{{ post.images.url }}{% else %}{% static 'img/icon_photo.png' %}{% endif %}" alt="이미지 설명" id="imagePreview">
+                    <input type="file" name="images" accept="image/*" style="display: none;" onchange="previewImage(event);">
+                  </label>
+                  <div>
+                    <div class="flex-box column baseline title-box">
+                      <label for="title">글 제목</label>
+                      <input type="text" name="title" placeholder="글 제목" required="required" value="{% if post %}{{ post.title }}{% endif %}">
+                      <label for=" price">가격</label>
+                      <input type="text" name="price" placeholder="가격" required="required" value="{% if post %}{{ post.price }}{% endif %}">
+                    </div>
+                  </div>
+                </div>
+                <div class="full-box">
+                  <label for="description" class="block-box">물품 설명</label>
+                  <textarea name="description" required="required">
+                    {% if post %}{{ post.description }}
+                    {% endif %}
+                  </textarea>
+
+                </div>
+                <div class="full-box">
+                  <label for="location" class="block-box">거래 희망 장소</label>
+                  <input type="text" name="location" placeholder="거래를 희망하는 장소" required="required" value="{% if post %}{{ post.location }}{% endif %}">
+                </div>
+                <div class="submit-button-box">
+                  {% if post %}
+                    <button type="submit">수정하기</button>
+                  {% else %}
+                    <button type="submit">전송</button>
+                  {% endif %}
+                </div>
+              </form>
+            </div>
+          </div>
+        {% endblock %}
+
+        <script type="text/javascript" src="{% static 'js/write.js' %}"></script>
+
+      </body>
+
+    </html>

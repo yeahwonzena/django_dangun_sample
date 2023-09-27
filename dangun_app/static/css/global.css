@@ -1,0 +1,84 @@
+*{
+    font-family: 'Pretendard', sans-serif;
+}
+
+button, a, link{
+    cursor: pointer;
+}
+
+
+.content-box{
+    margin-top: 65px;
+}
+
+
+.container{
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    gap: 20px;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.block-box{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
+.button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+.flex-box{
+    display: flex;
+    align-items: center;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.baseline{
+    align-items: baseline;
+}
+
+.center{
+    align-items: center;
+}
+
+.between{
+    justify-content: space-between;
+}
+
+.full-box{
+    width: 100%;
+}
+
+.gap16{
+    gap: 16px;
+    }
+    
+.gap8{
+gap: 8px;
+}
+
+h1{
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 64px;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.back-ye{
+    background-color: #fffae0;
+}

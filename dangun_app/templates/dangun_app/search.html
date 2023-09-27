@@ -1,0 +1,56 @@
+{% load static %}{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색결과</title>
+  </head>
+
+  <body>
+    {% include 'dangun_app/nav.html' %}
+    <div class="post-box">
+      <div class="container column center">
+        <div class="container column center">
+          <div class="full-box trade-box column">
+            <div class="flex-box full-box card-container between">
+              {% for post in posts %}
+
+                <div class="card-box">
+                  <a href="{% url 'dangun_app:trade_post' post.pk %}" class="trade-text-link">
+                    <div class="card-img">
+                      {% if post.images %}
+                        <img src="{{ post.images.url }}" alt="{{ post.title }}">
+                      {% endif %}
+                    </div>
+                    <div class="card-info-box">
+                      <h5>{{ post.title }}</h5>
+                      <p class="bold">{{ post.price |intcomma}}원</p>
+                      <p>{{ post.location }}</p>
+                      <div class="flex-box">
+                        <p>조회
+                          {{ post.view_num }}</p>
+                        <p>·</p>
+                        <p>채팅
+                          {{ post.chat_num }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'dangun_app/footer.html' %}
+    </body>
+
+  </html>

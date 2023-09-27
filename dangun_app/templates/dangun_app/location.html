@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/location.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    <title>동네인증</title>
+  </head>
+
+  <body class="back-ye">
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% include 'dangun_app/nav.html' %}
+    <div class="content-box">
+      <div class="container column center">
+        <div class="region-setting-box full-box">
+          <label for="region-setting">내 동네 설정</label>
+          <form method="POST" action="/set_region/" id="region-form">
+            {% csrf_token %}
+            <div class="flex-box full-box between region-input">
+              <input type="text" id="region-setting" class="region-setting" name="region-setting" placeholder="예) 서울 강서구 화곡동" value="{% if region %}{{ region }}{% endif %}">
+              <button type="submit" class="ghost-button orange region-setting" style="width:15%" id="set-region-button">
+                {% if region %}
+                  수정
+                {% else %}
+                  저장
+                {% endif %}
+              </button>
+
+            </div>
+          </form>
+        </div>
+        <div id="map" style="width: 100%; height: 468px; margin-top: 44px"></div>
+        <h5 id="region-info">현재 위치는</h5>
+        <h5 id="region-judge"></h5>
+        <form id="region-certification-form" method="POST" action="/set_region_certification/" class="full-box">
+          {% csrf_token %}
+          <button id="region-save-button" class="primary-button">동네인증하기</button>
+        </form>
+      </div>
+    </div>
+    {% include 'dangun_app/footer.html' %}
+
+    <!--카카오 api key-->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06b71a5db40aca812f7ae8bff82d58b9&libraries=services"></script>
+
+    <script type="text/javascript" src="{% static 'js/location.js' %}"></script>
+  </body>
+
+</html>

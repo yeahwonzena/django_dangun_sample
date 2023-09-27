@@ -1,0 +1,95 @@
+{% load static%}{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/trade_post.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    <title>중고거래 상세보기</title>
+  </head>
+
+  <body>
+    {% include 'dangun_app/nav.html' %}
+    <div class="content-box">
+      <div class="container column">
+        <div class="post-box">
+          {% block content %}
+            <img src="{{ post.images.url }}" alt="{{ post.title }}" class="block-box">
+            <div class="flex-box between info-button-box">
+              <div class="user-info">
+                <h6 id="post_seller">{{ post.user }}</h6>
+                <p>{{ user_profile.region }}</p>
+              </div>
+              {% if request.user.username == post.user.username %}
+                <div class="flex-box button-box">
+                  <a href="{% url 'dangun_app:edit' post.id %}">
+                    <button class="grey">수정하기</button>
+                  </a>
+                  <button class="orange">채팅보기</button>
+                </div>
+              {% else %}
+                <div class="button-box">
+                  <button id="chat_button" class="orange">채팅하기</button>
+                </div>
+              {% endif %}
+            </div>
+            <hr class="line">
+            <div class="post-info-box">
+              <div class="flex-box between">
+                <h3>{{ post.title }}</h3>
+                <h3>{{ post.price |intcomma}}
+                  원</h3>
+              </div>
+              <p>{{ post.description }}</p>
+              <div class="location-views-box flex-box between">
+                <p>희망 거래장소 |
+                  {{ post.location }}</p>
+                <p>조회수
+                  {{ post.view_num }}</p>
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    {% include 'dangun_app/footer.html' %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        // 채팅버튼 눌렀을 때
+        let chatButton = document.getElementById("chat_button");
+        chatButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          // 현재 페이지 URL에서 pk 가져오기
+          let currentUrl = window.location.href;
+          let parts = currentUrl.split('/');
+          let pk = parts[parts.length - 2];
+          pk = parseInt(pk, 10);
+
+          // 채팅방을 생성하거나 기존방에 참여한 후, 생성된 채팅방의 ID를 반환
+          // 채팅방으로 리디렉션
+          fetch(`/create_or_join_chat/${pk}/`)
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                window.location.href = `/chat_index/${data.chat_room_id}/`;
+              } else {
+                alert("다시 시도해주세요");
+              }
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+        });
+      });
+    </script>
+  </body>
+
+</html>

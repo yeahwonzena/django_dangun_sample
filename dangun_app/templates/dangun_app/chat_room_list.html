@@ -1,0 +1,34 @@
+<!-- chat/templates/chat/chat_room_list.html -->
+{% load humanize %}
+<!-- chat/templates/chat/chat_room_list.html -->
+{% for chat_room_data in chat_room_data %}
+  <a href="{% url 'dangun_app:chat_room' chat_room_data.chat_room.room_number %}" class="chatroom-link">
+    <div class="flex-box chat-box between">
+
+      <div class="flex-box column" style="place-items: flex-start;">
+        <div class="flex-box">
+          <p class="bold">
+            {% if chat_room_data.chat_room.starter.username != request.user.username %}
+              {{ chat_room_data.chat_room.starter.username }}
+            {% endif %}
+            {% if chat_room_data.chat_room.receiver.username != request.user.username %}
+              {{ chat_room_data.chat_room.receiver.username }}
+            {% endif %}
+          </p>
+          <p class="s-text">{{ chat_room_data.timestamp|naturaltime }}</p>
+        </div>
+        <div>
+          {% if chat_room_data.latest_message %}
+            {{ chat_room_data.latest_message }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="thumbnail-box">
+        {% if chat_room_data.chat_room.post.images %}
+          <img src="{{ chat_room_data.chat_room.post.images.url }}" alt="Post Thumbnail">
+        {% endif %}
+      </div>
+
+    </div>
+  </a>
+{% endfor %}

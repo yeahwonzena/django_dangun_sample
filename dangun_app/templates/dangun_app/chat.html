@@ -1,0 +1,119 @@
+{% load static%}{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    <title>채팅하기</title>
+  </head>
+
+  <body class="back-ye">
+    {% include 'dangun_app/nav.html' %}
+    <div class="content-box">
+      <div class="container column">
+        <div class="post-box flex-box">
+
+          <!-- 채팅선택창 -->
+          <div class="chat-select-container">
+            <div class="flex-box">
+
+              <!-- 아이디및 체크박스 -->
+              <div class="id-box flex-box between">
+                아이디
+                <div>
+                  <label>
+                    안읽은 메세지만 보기
+                    <input type="checkbox" name="" id="">
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- 채팅 리스트 -->
+            <div class="chat-list-box flex-box column">
+              <!-- 봇 -->
+              <div class="chat-box flex-box">
+                <div class="ai-profile">
+                  <img src="{% static 'img/icon_aibot.png'%}" alt="">
+                </div>
+                <div>
+                  <p class="bold">AI 챗봇</p>
+                  <p class="chat-thumb-text">궁금한 내용을 물어보세요!</p>
+                </div>
+              </div>
+              <!-- 채팅방리스트 -->
+              <div class="flex-box chat-box between">
+                <div>
+                  <div class="flex-box">
+                    <p class="bold">상대방아이디</p>
+                    <p class="s-text">화곡동</p>
+                    <p class="s-text">3주전</p>
+                  </div>
+                  <p class="chat-thumb-text">거래 잘 하셨나요? 거래한 이웃..</p>
+                </div>
+                <div class="thumbnail-box">
+                  <img src="" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 채팅창-->
+          <div class="chat-main-container">
+            <div>
+              <div class="contact-info flex-box">
+                상대방아이디
+                <div class="temp">
+                  36.9도
+                </div>
+              </div>
+
+              <!--물품정보-->
+              <div class="goods-box flex-box between">
+                <div class="flex-box">
+                  <div class="selected-thumbnail-box">
+                    <img src="" alt="">
+                  </div>
+                  <div class="goods-info-box">
+                    <p>LG 양문형 냉장고 778L</p>
+                    <p class="bold">150,000원</p>
+                  </div>
+                </div>
+                <button>거래완료</button>
+              </div>
+
+              <!--채팅창 메인-->
+              <div class="chat-container">
+                <div class="message-box from-you">
+                  <div class="message-text">입금확인했습니다~</div>
+                  <p class="s-text">오전 8:20</p>
+                </div>
+                <div class="message-box from-me">
+                  <p class="s-text">오전 8:20</p>
+                  <div class="message-text">네 좋은물건 감사합니다~</div>
+                </div>
+              </div>
+            </div>
+
+            <form class="chat-input" action="submit">
+              <textarea name="" id="" cols="30" rows="10" placeholder="메세지를 입력해주세요"></textarea>
+              <div>
+                <button>전송</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'dangun_app/footer.html' %}
+
+  </body>
+
+</html>
