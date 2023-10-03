@@ -38,11 +38,7 @@
                 </div>
                 <div class="full-box">
                   <label for="description" class="block-box">물품 설명</label>
-                  <textarea name="description" required="required">
-                    {% if post %}{{ post.description }}
-                    {% endif %}
-                  </textarea>
-
+                  <textarea name="description" required="required">{% if post %}{{ post.description }}{% endif %}</textarea>
                 </div>
                 <div class="full-box">
                   <label for="location" class="block-box">거래 희망 장소</label>

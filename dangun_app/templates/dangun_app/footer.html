@@ -2,7 +2,7 @@
   <div class="container flex-box between">
     <div class="buttons flex-box">
       <a href="/trade">중고거래</a>
-      <a href="/chat">채팅하기</a>
+      <a href="{% url 'dangun_app:get_latest_chat_no_pk' %}">채팅하기</a>
     </div>
     <div>
       <p class="bold" style="margin-bottom:8px">당근 앱 다운로드</p>

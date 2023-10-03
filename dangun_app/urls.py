@@ -31,6 +31,10 @@ urlpatterns = [
     path("chat_index", views.index, name='index'),  
     path('chat_index/<int:pk>/', views.chat_room, name='chat_room'),
     path('create_or_join_chat/<int:pk>/', views.create_or_join_chat, name='create_or_join_chat'),
+    path('get_latest_chat/', views.get_latest_chat_no_pk, name='get_latest_chat_no_pk'),
+    path('get_latest_chat/<int:pk>/', views.get_latest_chat, name='get_latest_chat'),
+
+    path('confirm_deal/<int:post_id>/', views.ConfirmDealView.as_view(), name='confirm_deal'),
 
 ]
 

@@ -13,6 +13,8 @@ class Post(models.Model):
 
     product_reserved = models.CharField(max_length=1, default='N')  # 예약 여부
     product_sold = models.CharField(max_length=1, default='N')  # 판매 여부
+    buyer = models.ForeignKey(User, related_name='purchased_posts', null=True, blank=True, on_delete=models.SET_NULL) # 구매자
+
 
     view_num = models.PositiveIntegerField(default=0)  # 조회 수
     chat_num = models.PositiveIntegerField(default=0)  # 채팅 수

@@ -115,7 +115,9 @@ hr{
 }
 
 .chat-list-box{
-    width: 100%;    
+    width: 100%;
+    overflow-y: scroll;
+    height: 92%;
 }
 
 .chat-box{

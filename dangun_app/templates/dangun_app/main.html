@@ -20,11 +20,17 @@
           <h1>당신 근처의<br>지역 생활 커뮤니티</h1>
           <h4>동네라서 가능한 모든것<br>당근에서 가까운 이웃과 함께해요.</h4>
           <div class="flex-box gap16">
-            <button class="flex-box gap8">
-              <img src="{% static 'img/icon_googleplay.png' %}" alt=""/>Google Play</button>
-            <button class="flex-box gap8">
-              <img src="{% static 'img/icon_appstore.png' %}" alt=""/>App Store</button>
-          </div>
+            <a href="https://play.google.com/store/apps/details?id=com.towneers.www&pcampaignid=web_share" target="_blank">
+                <button class="flex-box gap8">
+                    <img src="{% static 'img/icon_googleplay.png' %}" alt=""/>Google Play
+                </button>
+            </a>
+            <a href="https://apps.apple.com/kr/app/%EB%8B%B9%EA%B7%BC/id1018769995" target="_blank">
+                <button class="flex-box gap8">
+                    <img src="{% static 'img/icon_appstore.png' %}" alt=""/>App Store
+                </button>
+            </a>
+        </div>
         </div>
         <img src="{% static 'img/character.png' %}" alt=""/>
       </div>

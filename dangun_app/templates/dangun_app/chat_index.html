@@ -30,14 +30,14 @@
       document
         .querySelector('#room-name-submit')
         .onclick = function (e) {
-          var username = document
+          let username = document
             .querySelector('#username-input')
             .value;
-          var pathArray = window
+          let pathArray = window
             .location
             .pathname
             .split('/');
-          var roomName = pathArray[2]; // URL의 세 번째 세그먼트를 가져옵니다.
+          let roomName = pathArray[2]; // URL의 세 번째 세그먼트를 가져옵니다.
           console.log(roomName); // 콘솔에 룸 번호를 출력하여 확인합니다.
           // 콘솔에 룸 번호를 출력하여 확인합니다.
           window.location.pathname = '/chat_index/' + roomName + '/';

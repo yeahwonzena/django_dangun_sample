@@ -31,7 +31,7 @@
                   <a href="{% url 'dangun_app:edit' post.id %}">
                     <button class="grey">수정하기</button>
                   </a>
-                  <button class="orange">채팅보기</button>
+                  <button id="chat_view_button" class="orange">채팅보기</button>
                 </div>
               {% else %}
                 <div class="button-box">
@@ -65,28 +65,67 @@
 
         // 채팅버튼 눌렀을 때
         let chatButton = document.getElementById("chat_button");
-        chatButton.addEventListener("click", function (event) {
-          event.preventDefault();
-          // 현재 페이지 URL에서 pk 가져오기
-          let currentUrl = window.location.href;
-          let parts = currentUrl.split('/');
-          let pk = parts[parts.length - 2];
-          pk = parseInt(pk, 10);
+        if(chatButton !== null){
+          chatButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            // 현재 페이지 URL에서 pk 가져오기
+            let currentUrl = window.location.href;
+            let parts = currentUrl.split('/');
+            let pk = parts[parts.length - 2];
+            pk = parseInt(pk, 10);
+  
+            // 채팅방을 생성하거나 기존방에 참여한 후, 생성된 채팅방의 ID를 반환
+            // 채팅방으로 리디렉션
+            fetch(`/create_or_join_chat/${pk}/`)
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  window.location.href = `/chat_index/${data.chat_room_id}/`;
+                } else {
+                  alert("다시 시도해주세요");
+                }
+              })
+              .catch(error => {
+                console.error("Error:", error);
+              });
+          });
+        }
+        
 
-          // 채팅방을 생성하거나 기존방에 참여한 후, 생성된 채팅방의 ID를 반환
-          // 채팅방으로 리디렉션
-          fetch(`/create_or_join_chat/${pk}/`)
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                window.location.href = `/chat_index/${data.chat_room_id}/`;
-              } else {
-                alert("다시 시도해주세요");
-              }
-            })
-            .catch(error => {
-              console.error("Error:", error);
-            });
+
+         // 채팅보기 버튼 클릭 이벤트
+        let viewChatButton = document.getElementById("chat_view_button");
+        viewChatButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            // 현재 페이지 URL에서 pk 가져오기
+            let currentUrl = window.location.href;
+            let parts = currentUrl.split('/');
+            let pk = parts[parts.length - 2];
+            pk = parseInt(pk, 10);
+
+            // 서버로 pk 전송 후 채팅방 정보 가져오기
+            fetch(`/get_latest_chat/${pk}/`)
+              .then(response => 
+                  response.text().then(text => {
+                      try {
+                          return JSON.parse(text);
+                      } catch {
+                          console.error("Returned HTML:", text);
+                          throw new Error("Server did not return JSON. See logged HTML for details.");
+                      }
+                  })
+              )
+              .then(data => {
+                  if (data.success) {
+                      window.location.href = `/chat_index/${data.chat_room_id}/`;
+                  } else {
+                      alert(data.error_message);
+                      window.location.href = data.redirect_url;
+                  }
+              })
+              .catch(error => {
+                  console.error("Error:", error);
+              });
         });
       });
     </script>

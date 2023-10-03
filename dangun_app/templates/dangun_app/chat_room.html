@@ -61,7 +61,7 @@
           <div class="chat-main-container">
             <div>
               <div class="contact-info flex-box">
-                {{ seller.username }}
+                {{ opponent.username }}
 
                 <span id="room-name" style="display:none">{{ chat_room.pk }}</span>
               </div>
@@ -74,24 +74,31 @@
                   </div>
                   <div class="goods-info-box">
                     <p>{{ post.title }}</p>
-                    <p class="bold">{{ post.price }}원</p>
+                    <p class="bold">{{ post.price |intcomma}}원</p>
                   </div>
                 </div>
-                <button>거래확정하기</button>
+                {% if user.id == post.user.id %}
+                    <form method="post" action="{% url 'dangun_app:confirm_deal' post.id %}">
+                        {% csrf_token %}
+                        <button type="submit">거래확정하기</button>
+                    </form>
+                {% endif %}
+            
               </div>
 
               <!--채팅창 메인-->
 
               <div id="chat-log" class="chat-container"></div>
 
-              <form class="chat-input" action="">
-                <textarea name="" id="chat-message-input" cols="30" rows="10" placeholder="메세지를 입력해주세요"></textarea>
-                <div>
-                  <button id="chat-message-submit">전송</button>
-                </div>
-              </form>
+              
 
             </div>
+            <form class="chat-input" action="">
+              <textarea name="" id="chat-message-input" cols="30" rows="10" placeholder="메세지를 입력해주세요"></textarea>
+              <div>
+                <button id="chat-message-submit">전송</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -119,9 +126,16 @@
         //메세지 실시간으로 채팅창에 넣음
         chatSocket.onmessage = function (e) {
           const data = JSON.parse(e.data);
-
+          
+          // 메시지의 발신자가 현재 사용자인지 확인
+          const isFromMe = data.username === userName;
+          
+          // 메시지 박스의 CSS 클래스를 설정
+          const messageClass = isFromMe ? "from-me" : "";
+          
+          // 메시지 박스를 동적으로 생성하고 페이지에 추가
           let chatLogTest = document.getElementById("chat-log");
-          chatLogTest.innerHTML += `<div class="message-box from-me">
+          chatLogTest.innerHTML += `<div class="message-box ${messageClass}">
               <div class="message-text">${data.message}</div>
             </div>`;
         };
