@@ -16,8 +16,12 @@ from .models import Post,UserProfile, ChatRoom, Message
 from .forms import CustomLoginForm, CustomRegistrationForm, PostForm
 
 # Alert용 화면
-def alert(request, alert_message):
-    return render(request, 'dangun_app/alert.html', {'alert_message': alert_message})
+def alert(request, alert_message, redirect_url='location'): # default 값을 'location'으로 설정
+    context = {
+        'alert_message': alert_message,
+        'redirect_url': redirect_url
+    }
+    return render(request, 'dangun_app/alert.html', context)
 
 
 
@@ -123,7 +127,11 @@ def get_latest_chat(request, pk):
 
     # 3) 모두 없다면 현재 페이지로 리디렉션
     except ChatRoom.DoesNotExist:
-        return redirect('dangun_app:alert', alert_message='진행중인 채팅이 없습니다.')
+        return JsonResponse({
+            'success': False, 
+            'alert_message': '진행중인 채팅이 없습니다.'
+        })
+
         
 # nav/footer에서 채팅하기 눌렀을 때
 @login_required
@@ -137,7 +145,7 @@ def get_latest_chat_no_pk(request):
         return redirect('dangun_app:chat_room', pk=latest_chat.room_number)
 
     except ChatRoom.DoesNotExist:
-        return redirect('dangun_app:alert', alert_message='진행중인 채팅이 없습니다.')
+        return redirect('dangun_app:alert', alert_message='진행중인 채팅이 없습니다.', redirect_url='current')
     
 @method_decorator(login_required, name='dispatch')
 class ConfirmDealView(View):
@@ -224,9 +232,9 @@ def write(request):
         if user_profile.region_certification == 'Y':
             return render(request, 'dangun_app/write.html')
         else:
-            return redirect('dangun_app:alert', alert_message='동네인증이 필요합니다.')
+            return redirect('dangun_app:alert', alert_message='동네인증이 필요합니다.', redirect_url='location')
     except UserProfile.DoesNotExist:
-        return redirect('dangun_app:alert', alert_message='동네인증이 필요합니다.')
+        return redirect('dangun_app:alert', alert_message='동네인증이 필요합니다.', redirect_url='location')
 
 # 거래글수정 화면
 def edit(request, id):

@@ -10,7 +10,8 @@ urlpatterns = [
     
     path('test/', views.test, name='test'),
 
-    path('alert/<str:alert_message>/', views.alert, name='alert'),
+    path('alert/<str:alert_message>/<str:redirect_url>/', views.alert, name='alert'),
+
 
     path('', views.main, name='main'),
     path('login/', views.custom_login, name='login'),

@@ -25,7 +25,7 @@
                 <div class="flex-box">
                   <label class="img-upload">
                     <img src="{% if post %}{{ post.images.url }}{% else %}{% static 'img/icon_photo.png' %}{% endif %}" alt="이미지 설명" id="imagePreview">
-                    <input type="file" name="images" accept="image/*" style="display: none;" onchange="previewImage(event);">
+                    <input type="file" name="images" accept="image/*" style="display: none;" onchange="previewImage(event);" required="required">
                   </label>
                   <div>
                     <div class="flex-box column baseline title-box">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="full-box">
                   <label for="description" class="block-box">물품 설명</label>
-                  <textarea name="description" required="required">{% if post %}{{ post.description }}{% endif %}</textarea>
+                  <textarea name="description" required="required" placeholder="상품을 설명해주세요">{% if post %}{{ post.description }}{% endif %}</textarea>
                 </div>
                 <div class="full-box">
                   <label for="location" class="block-box">거래 희망 장소</label>
@@ -46,9 +46,9 @@
                 </div>
                 <div class="submit-button-box">
                   {% if post %}
-                    <button type="submit">수정하기</button>
+                    <button type="submit" id="submit-button">수정하기</button>
                   {% else %}
-                    <button type="submit">전송</button>
+                    <button type="submit" id="submit-button">전송</button>
                   {% endif %}
                 </div>
               </form>

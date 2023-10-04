@@ -8,7 +8,13 @@
   <body>
     <script type="text/javascript">
       alert('{{ alert_message }}');
-      window.location.href = '{% url "dangun_app:location" %}';
+      {% if redirect_url == "location" %}
+        window.location.href = '{% url "dangun_app:location" %}';
+      {% elif redirect_url == "current" %}
+        window.history.back();
+      {% else %}
+        window.history.back();
+      {% endif %}
     </script>
   </body>
 

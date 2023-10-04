@@ -119,8 +119,7 @@
                   if (data.success) {
                       window.location.href = `/chat_index/${data.chat_room_id}/`;
                   } else {
-                      alert(data.error_message);
-                      window.location.href = data.redirect_url;
+                    alert(data.alert_message);
                   }
               })
               .catch(error => {

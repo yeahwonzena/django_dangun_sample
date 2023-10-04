@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wy-@@!*k$*jo&k=)_gx(hn&qmea7e%+l6)czxw5&3+@%fizg2n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['121.142.23.244', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['121.142.23.244', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'daphne',
     'channels',
     'channels_redis',
     'dangun_app',
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
 ASGI_APPLICATION  =  'dangun_project.asgi.application'
 
-ALLOWED_HOSTS = ['121.142.23.244', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 CHANNEL_LAYERS = {
     "default": {
